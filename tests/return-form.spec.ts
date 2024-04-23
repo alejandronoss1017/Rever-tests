@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 const orderNumber = 'C4AS23';
+const email = 'myemail@email.com'
 
 test('Fill return form', async ({ page }) => {
 
@@ -11,7 +12,7 @@ test('Fill return form', async ({ page }) => {
   await page.getByPlaceholder('X01234').fill(orderNumber);
   await page.getByPlaceholder('X01234').press('CapsLock');
   await page.getByPlaceholder('example@partner.com').click();
-  await page.getByPlaceholder('example@partner.com').fill('myemail@email.com');
+  await page.getByPlaceholder('example@partner.com').fill(email);
   await page.getByRole('button', { name: 'Continue' }).click();
 
   await expect(page.getByText(orderNumber)).toBeVisible();
