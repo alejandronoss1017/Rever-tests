@@ -3,9 +3,12 @@ import { test, expect } from '@playwright/test';
 const orderNumber = 'C4AS23';
 const email = 'myemail@email.com'
 
-test('test', async ({ page }) => {
+test.beforeEach(async ({ page }) => {
   await page.goto('https://returns.itsrever.com/partner');
+});
 
+// Verify the interface for specifying return details
+test('test', async ({ page }) => {
   await page.getByPlaceholder('X01234').fill(orderNumber);
   await page.getByPlaceholder('example@partner.com').click();
   await page.getByPlaceholder('example@partner.com').fill(email);

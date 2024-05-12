@@ -3,8 +3,12 @@ import { test, expect } from '@playwright/test';
 const orderNumber = 'C4AS23';
 const email = 'myemail@email.com'
 
-test('Check if there are items in the return order', async ({ page }) => {
+test.beforeEach(async ({ page }) => {
   await page.goto('https://returns.itsrever.com/partner');
+});
+
+// Verify the process of viewing products related to a specified order number
+test('Check if there are items in the return order', async ({ page }) => {
 
   // Fill the form
   await page.getByPlaceholder('X01234').click();
