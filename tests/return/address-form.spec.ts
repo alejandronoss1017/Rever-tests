@@ -5,18 +5,18 @@ const email = "myemail@email.com";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("https://returns.itsrever.com/partner");
+
+  // Complete the initial form
+  await page.getByPlaceholder("X01234").click();
+  await page.getByPlaceholder("X01234").fill(orderNumber);
+  await page.getByPlaceholder("example@partner.com").click();
+  await page.getByPlaceholder("example@partner.com").fill(email);
+  await page.getByRole("button", { name: "Continue" }).click();
 });
 
 test.describe("Return address form", () => {
-    
   // Verify the home pickup for returns in Spain
   test("Fill return address form with Spain value", async ({ page }) => {
-    await page.getByPlaceholder("X01234").click();
-    await page.getByPlaceholder("X01234").fill(orderNumber);
-    await page.getByPlaceholder("example@partner.com").click();
-    await page.getByPlaceholder("example@partner.com").fill(email);
-    await page.getByRole("button", { name: "Continue" }).click();
-
     await page.locator(".sc-dtInlm").first().click();
     await page.getByTestId("modal").getByRole("img").nth(2).click();
     await page.getByText("Wrong color").click();
@@ -38,12 +38,6 @@ test.describe("Return address form", () => {
 
   // Verify the home pickup for returns in Colombia
   test("Fill return address form with Colombia value", async ({ page }) => {
-    await page.getByPlaceholder("X01234").click();
-    await page.getByPlaceholder("X01234").fill(orderNumber);
-    await page.getByPlaceholder("example@partner.com").click();
-    await page.getByPlaceholder("example@partner.com").fill(email);
-    await page.getByRole("button", { name: "Continue" }).click();
-
     await page.locator(".sc-dtInlm").first().click();
     await page.getByTestId("modal").getByRole("img").nth(2).click();
     await page.getByText("Wrong color").click();
